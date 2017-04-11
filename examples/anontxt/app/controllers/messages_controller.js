@@ -16,7 +16,6 @@ module.exports = {
   },
   create: function (req, res, next) {
     var params = _.pick(req.body, 'title', 'body');
-    console.log(params);
     req.models.message.create(params, function (err, message) {
       if(err) {
         if(Array.isArray(err)) {
@@ -29,11 +28,10 @@ module.exports = {
       return res.send(200, message.serialize());
     });
   },
+
+  //RESTFUL API GET,get param from url /messages/:id
   get: function (req, res, next) {
-    var params = req.params.id;
-    console.log(params);
-    //res.send(params.serialize());
-    req.models.message.get(params, function (err, message) {
+    req.models.message.get(req.params.id, function (err, message) {
       if(err) {
         if(Array.isArray(err)) {
           return res.send(200, { errors: helpers.formatErrors(err) });

@@ -7,4 +7,6 @@ module.exports = function (app) {
   app.post('/messages'                   , controllers.messages.create);
   app.get( '/message/:id'                , controllers.messages.get);
   app.post('/message/:messageId/comments', controllers.comments.create);
+  app.del('/message/:messageId/:commentId', controllers.comments.delete);
+  app.post('/comment/update', controllers.comments.update);
 };
