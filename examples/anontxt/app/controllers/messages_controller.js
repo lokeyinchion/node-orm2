@@ -16,7 +16,7 @@ module.exports = {
   },
   create: function (req, res, next) {
     var params = _.pick(req.body, 'title', 'body');
-
+    console.log(params);
     req.models.message.create(params, function (err, message) {
       if(err) {
         if(Array.isArray(err)) {
@@ -30,6 +30,19 @@ module.exports = {
     });
   },
   get: function (req, res, next) {
+    var params = req.params.id;
+    console.log(params);
+    //res.send(params.serialize());
+    req.models.message.get(params, function (err, message) {
+      if(err) {
+        if(Array.isArray(err)) {
+          return res.send(200, { errors: helpers.formatErrors(err) });
+        } else {
+          return next(err);
+        }
+      }
 
+      return res.send(200, message.serialize());
+    });
   }
 };
