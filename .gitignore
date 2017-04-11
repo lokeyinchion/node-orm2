@@ -8,3 +8,5 @@ test/coverage.html
 lib-cov/
 *~
 /.idea
+.idea
+npm-debug.log
